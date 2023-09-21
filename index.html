@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>naebalofo</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="conteiner">
+		<div class="header">
+			<h1 class="namesite">Подбор персонала </h1>
+		</div>
+		<div class="main">
+			<table>
+				<tr>
+					<td>
+						<h1>инженер-программист</h1>
+						<p1>xxxxxxx</p1>
+					</td>
+					<td>
+						<button onclick="showForm()">Откликнуться</button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h1>инженер-программист</h1>
+					</td>
+					<td>
+						<button onclick="showList()">Список откликнувшихся</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<br>
+		<div class="footer">
+			<div id="form" style="display: none;">
+				<h2>Форма для заполнения вакансии</h2>
+				<form method="post" action="process.php">
+					<label for="name">ФИО:</label>
+					<input type="text" id="name" name="name" required><br>
+		
+					<label for="phone">Номер телефона:</label>
+					<input type="tel" id="phone" name="phone" required><br>
+		
+					<label for="education">Образование:</label>
+					<input type="text" id="education" name="education" required><br>
+		
+					<label for="previous-job">Кем до этого работал:</label>
+					<input type="text" id="previous-job" name="previous-job" required><br>
+		
+					<label for="age">Полный возраст:</label>
+					<input type="number" id="age" name="age" required><br>
+		
+					<input type="submit" value="Отправить">
+				</form>
+			</div>
+		
+			<div id="list" style="display: none;">
+				<h2>Список откликнувшихся</h2>
+				<ul id="applicants"></ul>
+			</div>
+		</div>
+		</div>
+	<script src="script.js"></script>
+</body>
+</html>

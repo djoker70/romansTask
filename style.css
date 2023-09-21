@@ -1,0 +1,28 @@
+.header{
+	background-color: black;
+	border: 10px solid green;
+	text-align: center;
+}
+
+.main{
+	border: 10px solid blue;
+}
+
+
+.footer{
+	border: 10px solid green;
+}
+.namesite{
+
+	color: aqua;
+}
+
+
+.ul{
+	list-style: none;
+	padding: 0;
+}
+
+.li {
+	margin-bottom: 10px;
+}
