@@ -5,8 +5,8 @@ function getCardForm(id, title, description)
 			'<div class="card-body d-grid gap-2"> ' +
 				'<h5 class="card-title">' + title + '</h5> ' +
 				'<p class="card-text">' + description + '</p> ' +
-				'<button type="button" class="btn btn-primary">Откликнуться</button> ' +
-				'<button type="button" class="btn btn-primary">Список откликнувшихся</button>' +
+				'<button type="button" class="btn btn-primary connectBtn">Откликнуться</button> ' +
+				'<button type="button" class="btn btn-primary listPeoplesBtn" >Список откликнувшихся</button>' +
 			'</div> ' +
 		'</div>';
 }
@@ -16,33 +16,49 @@ function drawForm(form)
 	$('body').find('.main').append($(form));
 }
 
-$(document).ready(function() {
-	console.log("123");
-	//vacancyList - получать запросом из БД
-	var vacancyList = [
-		{id: 1, title: "title1", description: "desc1"},
-		{id: 2, title: "title2", description: "desc1"},
-		{id: 3, title: "title3", description: "desc1"}
-	];
-	vacancyList.forEach((item) => {
-		var cardForm = getCardForm(item.id, item.title, item.description);
-		drawForm(cardForm);
-	});
+function connectBtn() {
+	function drawModal(vacancyId, title, description) {
+		var myModal = new bootstrap.Modal(document.getElementById('connectBtnModal'), {
+			backdrop: true,
+			focus: true,
+			keyboard: true
+		});
+		$('body').find('#connectBtnModal #vacancyId').val(vacancyId);
+		$('body').find('#connectBtnModal #modal-title').html(title);
+		$('body').find('#connectBtnModal #description').html(description);
 
+		myModal.show();
+	}
+
+	$('body').on('click', '.connectBtn', function (e) {
+		e.preventDefault();
+		var card = $(this).parents('.card');
+		var vacancyId = $(card)[0].getAttribute('id');
+		var title = $(card).find('.card-title')[0].innerHTML;
+		var description = $(card).find('.card-text')[0].innerHTML;
+		drawModal(vacancyId, title, description);
+	});
+}
+
+$(document).ready(function() {
+	loadVacancy();
+	connectBtn();
 })
 
 function loadVacancy()
 {
 	$.ajax({
-		url: 'loadVacancy.php',
+		url: '/php/loadVacancy.php',
 		cache: false,
 		type: 'GET',
 		data: {
-			date: date
 		},
 		dataType: 'json',
 		success: function(vacancyList){
-
+			vacancyList.forEach((item) => {
+				var cardForm = getCardForm(item.id, item.title, item.description);
+				drawForm(cardForm);
+			});
 		}
 	});
 }
